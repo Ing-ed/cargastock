@@ -1,6 +1,8 @@
 
 export function Picture({src}){
     return(
-        <img src={src}/>
+        <div className="imageCont">
+            <img src={src} alt="img"/>
+        </div>
     )
 }
