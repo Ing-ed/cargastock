@@ -1,7 +1,5 @@
-// import './App.css';
+import './App.css';
 // import pic from './logo192.png'
-import { Button } from './Components/Button';
-import { Picture } from './Components/Picture';
 import { Form } from './Components/Form';
 import { Provider } from './Context/Context';
 
@@ -9,6 +7,9 @@ function App() {
 
   return (
     <Provider>
+      <header>
+        <h1> Cachitosbakery Products Loader</h1>
+      </header>
       <Form/>
     </Provider>
   );
