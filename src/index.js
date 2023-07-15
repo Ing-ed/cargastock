@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { initializeApp } from 'firebase/app';
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,10 +17,8 @@ const firebaseConfig = {
   messagingSenderId: "338011421421",
   appId: "1:338011421421:web:4757bab1e7253953de6ae4"
 };
-
-initializeApp(firebaseConfig)
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// Initialize Firebase
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

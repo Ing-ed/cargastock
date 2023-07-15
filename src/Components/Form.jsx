@@ -1,31 +1,46 @@
-import { useRef, useContext,useState, useEffect } from "react"
+import { useRef, useContext,useState, useEffect,useId } from "react"
+import {doc, collection, updateDoc, addDoc, getFirestore} from 'firebase/firestore'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { Context } from "../Context/Context";
 
 
 export function Form(){
-    let [getFoto,setFoto] = useState("");
+    let [getFoto,setFoto] = useState(null);
     let refName = useRef("");
     let refDesc = useRef("");
     let refPrec = useRef("");
     let refPict = useRef("");
     // let {getLista,setLista} = useContext(Context)
-
-    useEffect(() => {
-       console.log(getFoto,"getFoto") 
-    },[getFoto])
+    let storage = getStorage()
+    let db = getFirestore();
+    let menu = collection(db,"Menu");
+    // useEffect(() => {
+    //    console.log(getFoto,"getFoto") 
+    // },[getFoto])
 
     function CargarFoto(e){
-        setFoto(e.target.value)
-        console.log("VaL",e.target.value)
+        setFoto(e.target.files[0])
+        console.log("VaL",e.target.files[0])
     }
     function HandleSend(){
         let producto = {
             name: refName.current.value,
             descr: refDesc.current.value,
             price: refPrec.current.value,
-            pic: getFoto
+            pic: getFoto,
+            id: 1
         }
-        console.log(producto);
+        let cachitosRef = ref(storage, `CachitosBakery/${getFoto.name}`);
+        uploadBytes(cachitosRef,getFoto).then((snapshot) =>{
+            console.log("uploaded");
+            console.log(snapshot);
+        }).then(() => {
+            let url = getDownloadURL(cachitosRef).then((r) => {
+                producto.pic = r;
+                addDoc(collection(db,"Menu"),producto).then((res) => console.log(res.id))
+            })
+        })
+        // console.log(producto);
     }
     return(
         <div>
@@ -37,7 +52,7 @@ export function Form(){
                 <input ref={refName} type="text" name="Nombre"/>
                 <label>Nombre del producto</label>
                 <input ref={refDesc} type="textarea" name="Descrpcion"/>
-                <label>Nombre del producto</label>
+                <label>Descripcion del producto</label>
             </div>
             <div>
                 <label>$</label>
