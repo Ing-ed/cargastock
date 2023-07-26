@@ -1,0 +1,16 @@
+.NavBar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* border: 1px solid red; */
+    background-color: #EC9139;;
+    justify-content: center;
+}
+.NavBar li{
+    list-style: none;
+}
+.NavBar li button{
+    /* border: 1px solid black; */
+    padding:20px;
+    box-shadow: none;
+}

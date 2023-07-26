@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Context, Provider } from './Context/Context';
 import { initializeApp } from 'firebase/app';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -10,21 +11,23 @@ import { initializeApp } from 'firebase/app';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDo3-pWZ6f5u_w2Jbyoj0aj4i4Wp1Wx1ZI",
-  authDomain: "cachitosbakery-537fd.firebaseapp.com",
-  projectId: "cachitosbakery-537fd",
-  storageBucket: "cachitosbakery-537fd.appspot.com",
-  messagingSenderId: "338011421421",
-  appId: "1:338011421421:web:4757bab1e7253953de6ae4"
+  apiKey: "AIzaSyBIUQy46qVHkhD6eV8FgMxLKIhwYgbW5Ns",
+  authDomain: "cachitosbakery-52d03.firebaseapp.com",
+  projectId: "cachitosbakery-52d03",
+  storageBucket: "cachitosbakery-52d03.appspot.com",
+  messagingSenderId: "541850060285",
+  appId: "1:541850060285:web:d36a108fe2b5cae9494594"
 };
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,17 +1,26 @@
 import './App.css';
 // import pic from './logo192.png'
 import { Form } from './Components/Form';
-import { Provider } from './Context/Context';
+import { Context, Provider } from './Context/Context';
+import { NavBar } from './Components/NavBar';
+import { useContext } from 'react';
+import { Modify } from './Components/Modify';
 
 function App() {
-
+  let { getPag } = useContext(Context);
+  let Mostrar = {
+    Load:<Form />,
+    Mod: <Modify/>
+  }
   return (
-    <Provider>
+    <>
       <header>
         <h1> Cachitosbakery Products Loader</h1>
       </header>
-      <Form/>
-    </Provider>
+      <NavBar/>
+      {Mostrar[getPag]}
+      {/* <Form/> */}
+    </>
   );
 }
 

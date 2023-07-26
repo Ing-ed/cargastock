@@ -10,6 +10,7 @@ export function Form(){
     let refDesc = useRef("");
     let refPrec = useRef("");
     let refPict = useRef("");
+    let refCat  = useRef("");
     // let {getLista,setLista} = useContext(Context)
     let storage = getStorage()
     let db = getFirestore();
@@ -31,6 +32,7 @@ export function Form(){
     function HandleSend(){
         let producto = {
             name: refName.current.value,
+            category: refCat.current.value,
             descr: refDesc.current.value,
             price: refPrec.current.value,
             pic: getFoto,
@@ -42,7 +44,7 @@ export function Form(){
         }).then(() => {
                 getDownloadURL(cachitosRef).then((r) => {
                 producto.pic = r;
-                addDoc(collection(db,"Menu"),producto).then((res) => Limpiar())
+                addDoc(collection(db,"productos"),producto).then((res) => Limpiar())
             })
         })
         // console.log(producto);
@@ -55,16 +57,18 @@ export function Form(){
             </div>
             <div className="Col2">
                 <div className="Info">
-                    <input ref={refName} type="text" name="Nombre"/>
-                    <label>Nombre del producto</label>
-                    <input ref={refDesc} type="textarea" name="Descrpcion"/>
+                <input ref={refName} type="text" name="Nombre"/>
+                <label>Nombre del producto</label>
+                <input ref={refCat} type="text" name="Nombre"/>
+                <label>Categoria del producto</label>
+                <input ref={refDesc} type="textarea" name="Descrpcion"/>
                     <label>Descripcion del producto</label>
-                </div>
+            </div>
                 <div className="Precio">
-                    <label>$</label>
-                    <input ref={refPrec} type="number" name="Precio"/>
-                </div>
-                <button onClick={HandleSend}>Enviar</button>
+                <label>$</label>
+                <input ref={refPrec} type="number" name="Precio"/>
+            </div>
+            <button onClick={HandleSend}>Enviar</button>
             </div>
             
         </div>
